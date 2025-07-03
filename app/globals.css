@@ -5,8 +5,10 @@
   --foreground: #171717;
   --typography-primary: #121212;
   --typography-secondary: #6B6B6B;
+  --typography-tertiary: #D9D9D9;
   --gradient-primary: #377DFF;
   --gradient-secondary: #5093F8;
+  --action-background: #F1F1F1;
 }
 
 @theme inline {
@@ -15,8 +17,10 @@
   --color-foreground: var(--foreground);
   --color-typography-primary: var(--typography-primary);
   --color-typography-secondary: var(--typography-secondary);
+  --color-typography-tertiary: var(--typography-tertiary);
   --color-gradient-primary: var(--gradient-primary);
   --color-gradient-secondary: var(--gradient-secondary);
+  --color-action-background: var(--action-background);
 }
 
 @layer utilities {

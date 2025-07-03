@@ -1,9 +1,10 @@
+import Metrics from "@/components/hero/metrics";
 import PictureGrid from "@/components/hero/picture-grid";
 import PropertySearch from "@/components/hero/property-search";
 
 export default function Home() {
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="h-full flex items-center justify-evenly">
       <div className="flex flex-col">
         <div className="w-[30.625em] mb-[3.625rem] flex flex-col gap-y-8">
           <h1 className="text-[54px] font-semibold leading-16 tracking-[0.3px] text-typography-primary">Find your dream rent in the easiest way</h1>
@@ -15,24 +16,7 @@ export default function Home() {
           <PropertySearch label="Rent" />
         </div>
 
-        <div>
-          <ul className="flex items-center gap-x-10">
-            <li>
-              <p>50+</p>
-              <p>Awards</p>
-            </li>
-
-            <li>
-              <p>30+</p>
-              <p>Clients</p>
-            </li>
-
-            <li>
-              <p>250+</p>
-              <p>Properties</p>
-            </li>
-          </ul>
-        </div>
+        <Metrics />
       </div>
 
       <PictureGrid />
