@@ -1,21 +1,32 @@
-import Image from "next/image"
-
+import { cn } from "@/lib/utils";
 import building1 from "@/public/building-1.jpg"
 import building2 from "@/public/building-2.jpg"
 import building3 from "@/public/building-3.jpg"
+
+const MAX_DEPTH_LEVEL = 1;
+
+// We add a 0.25s delay for each picture.
+// Each deeper level adds 1s to the delay.
+const calculateAnimationDelay = (index: number, level: number) => {
+  if (level === MAX_DEPTH_LEVEL) {
+    return index > 0 ? index * 0.25 : index;
+  };
+
+  return index * 0.25 + MAX_DEPTH_LEVEL;
+}
 
 interface PictureGridProps {
   level?: number
 }
 
-export default function PictureGrid({ level = 1 }: PictureGridProps) {
+export default function PictureGrid({ level = MAX_DEPTH_LEVEL }: PictureGridProps) {
   let pictureSources = [
     building1,
     building2,
     building3,
   ]
 
-  if (level !== 1) {
+  if (level !== MAX_DEPTH_LEVEL) {
     // Move first element to the end
     const first = pictureSources.shift()
 
@@ -25,9 +36,24 @@ export default function PictureGrid({ level = 1 }: PictureGridProps) {
   }
 
   const pictureTags = [
-    <img src={pictureSources[0].src} alt="building-1" className="w-full h-full object-cover object-[65%] scale-105" />,
-    <img src={pictureSources[1].src} alt="building-2" className="w-full h-full object-cover object-[0_15%] scale-150 transform translate-x-8" />,
-    <img src={pictureSources[2].src} alt="building-3" className="w-full h-full object-cover scale-115" />
+    <img
+      alt="building-1"
+      src={pictureSources[0].src}
+      style={{ animationDelay: `${calculateAnimationDelay(0, level)}s` }}
+      className={cn("w-full h-full object-cover object-[65%] scale-105", level === MAX_DEPTH_LEVEL ? "animate-fade-in" : "animate-translucent-fade-in")}
+    />,
+    <img
+      alt="building-2"
+      src={pictureSources[1].src}
+      style={{ animationDelay: `${calculateAnimationDelay(1, level)}s` }}
+      className={cn("w-full h-full object-cover object-[0_15%] scale-150 transform translate-x-8", level === MAX_DEPTH_LEVEL ? "animate-fade-in" : "animate-translucent-fade-in")}
+    />,
+    <img
+      alt="building-3"
+      src={pictureSources[2].src}
+      style={{ animationDelay: `${calculateAnimationDelay(2, level)}s` }}
+      className={cn("w-full h-full object-cover scale-115", level === MAX_DEPTH_LEVEL ? "animate-fade-in" : "animate-translucent-fade-in")}
+    />
   ]
   
   return (
