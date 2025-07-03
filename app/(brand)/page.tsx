@@ -35,9 +35,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="h-[720px] grid grid-cols-2 justify-items-end gap-x-4">
-        <PictureGrid />
-      </div>
+      <PictureGrid />
     </div>
   )
 }
