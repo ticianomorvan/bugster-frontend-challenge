@@ -3,24 +3,24 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --typography-primary: #121212;
+  --typography-secondary: #6B6B6B;
+  --gradient-primary: #377DFF;
+  --gradient-secondary: #5093F8;
 }
 
 @theme inline {
+  --font-sans: var(--font-poppins);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-typography-primary: var(--typography-primary);
+  --color-typography-secondary: var(--typography-secondary);
+  --color-gradient-primary: var(--gradient-primary);
+  --color-gradient-secondary: var(--gradient-secondary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .bg-gradient-primary {
+    @apply bg-linear-[265deg] from-gradient-primary to-gradient-secondary;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
