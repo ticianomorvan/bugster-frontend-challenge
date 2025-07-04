@@ -43,7 +43,7 @@ export default function PropertySearch({ label }: PropertySearchProps) {
         <button
           className={cn(
             "py-3 px-8 relative z-10 font-semibold text-spacial-grey bg-soft-grey transition duration-150",
-            isOpen && "bg-white"
+            isOpen && "bg-white text-dark-grey"
           )}
         >
           {label}
