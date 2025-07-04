@@ -54,7 +54,7 @@ export default function PictureGrid({ level = MAX_DEPTH_LEVEL }: PictureGridProp
           level === MAX_DEPTH_LEVEL ? "gap-4" : "gap-2"
         )}
       >
-        <div className="h-2/3 w-full">
+        <div className="h-2/5 w-full">
           {
             // Here is where we show the component's recursivity.
             // Each level decreases the next one's depth limit.
@@ -62,7 +62,7 @@ export default function PictureGrid({ level = MAX_DEPTH_LEVEL }: PictureGridProp
           }
         </div>
 
-        <div className="h-11/12 w-full overflow-hidden">
+        <div className="h-3/5 w-full overflow-hidden">
           <PictureGridElement
             index={2}
             level={level}
