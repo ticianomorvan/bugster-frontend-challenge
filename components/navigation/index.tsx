@@ -1,7 +1,7 @@
+import routes from "@/data/routes.json";
+
 import BunqIcon from "../icons/bunq-icon";
 import UserIcon from "../icons/user-icon";
-
-import routes from "@/data/routes.json"
 
 import NavigationItem, { type NavigationItemProps } from "./navigation-item";
 import AddPropertyButton from "./add-property-button";
@@ -23,7 +23,7 @@ export default function Navigation() {
       </ul>
 
       <div className="flex items-center">
-        <button className="pr-6 flex items-center gap-x-4">
+        <button className="pr-6 flex items-center gap-x-4 cursor-pointer">
           <UserIcon />
           
           <span className="text-gradient-primary font-medium">

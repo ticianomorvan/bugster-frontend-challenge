@@ -1,24 +1,27 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
+
 import building1 from "@/public/building-1.jpg"
 import building2 from "@/public/building-2.jpg"
 import building3 from "@/public/building-3.jpg"
 
 const MAX_DEPTH_LEVEL = 1;
 
-// We add a 0.25s delay for each picture.
-// Each deeper level adds 1s to the delay.
-const calculateAnimationDelay = (index: number, level: number) => {
-  if (level === MAX_DEPTH_LEVEL) {
-    return index > 0 ? index * 0.25 : index;
-  };
+// How much we cut down the delay for each picture.
+const DELAY_MULTIPLIER = 0.25;
 
-  return index * 0.25 + MAX_DEPTH_LEVEL;
-}
+// How much we add to the delay for each level.
+const DELAY_THRESHOLD_IN_SECONDS = 0.75;
 
 interface PictureGridProps {
   level?: number
 }
 
+/**
+ * This component is used to display the picture grid in the hero section.
+ * This is a recursive component, which we hard limit to just two levels of depth.
+ * This means, in the heaviest case, we'll have a main layout with 3 pictures,
+ * and a nested layout with 3 pictures too, in the place of the first picture.
+ */
 export default function PictureGrid({ level = MAX_DEPTH_LEVEL }: PictureGridProps) {
   let pictureSources = [
     building1,
@@ -26,6 +29,8 @@ export default function PictureGrid({ level = MAX_DEPTH_LEVEL }: PictureGridProp
     building3,
   ]
 
+  // Every level of depth re-arranges the pictures,
+  // Sending the first picture to the end of the array.
   if (level !== MAX_DEPTH_LEVEL) {
     // Move first element to the end
     const first = pictureSources.shift()
@@ -35,46 +40,108 @@ export default function PictureGrid({ level = MAX_DEPTH_LEVEL }: PictureGridProp
     }
   }
 
-  const pictureTags = [
-    <img
-      alt="building-1"
-      src={pictureSources[0].src}
-      style={{ animationDelay: `${calculateAnimationDelay(0, level)}s` }}
-      className={cn("w-full h-full object-cover object-[65%] scale-105", level === MAX_DEPTH_LEVEL ? "animate-fade-in" : "animate-translucent-fade-in")}
-    />,
-    <img
-      alt="building-2"
-      src={pictureSources[1].src}
-      style={{ animationDelay: `${calculateAnimationDelay(1, level)}s` }}
-      className={cn("w-full h-full object-cover object-[0_15%] scale-150 transform translate-x-8", level === MAX_DEPTH_LEVEL ? "animate-fade-in" : "animate-translucent-fade-in")}
-    />,
-    <img
-      alt="building-3"
-      src={pictureSources[2].src}
-      style={{ animationDelay: `${calculateAnimationDelay(2, level)}s` }}
-      className={cn("w-full h-full object-cover scale-115", level === MAX_DEPTH_LEVEL ? "animate-fade-in" : "animate-translucent-fade-in")}
-    />
-  ]
-  
   return (
-    <div className="max-w-[43.25rem] max-h-[48rem] w-full h-full flex gap-4">
-      <div className="max-w-[18em] w-full h-full flex flex-col gap-4">
+    <div
+      className={cn(
+        // We decrease the columns' gap as we go deeper.
+        "max-w-[43.25rem] max-h-[48rem] w-full h-full flex",
+        level === MAX_DEPTH_LEVEL ? "gap-4" : "gap-2"
+      )}
+    >
+      <div
+        className={cn(
+          "max-w-[18em] w-full h-full flex flex-col",
+          level === MAX_DEPTH_LEVEL ? "gap-4" : "gap-2"
+        )}
+      >
         <div className="h-2/3 w-full">
-          {level !== 0 && <PictureGrid level={level - 1} />}
+          {
+            // Here is where we show the component's recursivity.
+            // Each level decreases the next one's depth limit.
+            level !== 0 && <PictureGrid level={level - 1} />
+          }
         </div>
+
         <div className="h-11/12 w-full overflow-hidden">
-          {pictureTags[2]}
+          <PictureGridElement
+            index={2}
+            level={level}
+            src={pictureSources[2].src}
+            className="object-cover scale-115"
+          />
         </div>
       </div>
 
-      <div className="max-w-[24.1875em] w-full h-full flex flex-col gap-4">
+      <div
+        className={cn(
+          "max-w-[24.1875em] w-full h-full flex flex-col",
+          level === MAX_DEPTH_LEVEL ? "gap-4" : "gap-2"
+        )}
+      >
         <div className="h-2/3 w-full overflow-hidden">
-          {pictureTags[0]}
+          <PictureGridElement
+            index={0}
+            level={level}
+            src={pictureSources[0].src}
+            className="object-[65%] scale-105"
+          />
         </div>
+
         <div className="h-1/3 w-full overflow-hidden">
-          {pictureTags[1]}
+          <PictureGridElement
+            index={1}
+            level={level}
+            src={pictureSources[1].src}
+            className="object-[0_15%] scale-150 transform translate-x-8"
+          />
         </div>
       </div>
     </div>
+  )
+}
+
+// We add a 0.25s delay for each picture.
+// Each deeper level adds 1s to the delay.
+const calculateAnimationDelay = (index: number, level: number) => {
+  if (level === MAX_DEPTH_LEVEL) return index * DELAY_MULTIPLIER;
+
+  return (index * DELAY_MULTIPLIER) + DELAY_THRESHOLD_IN_SECONDS;
+}
+
+interface PictureGridElementProps {
+  src: string
+  index?: number
+  level?: number
+  className?: string
+}
+
+/**
+ * This is a component used to display a picture in the picture grid.
+ * It allows to pass custom class names,
+ * as every picture needs different adjustments.
+ * 
+ * We use the picture's index as well as the grid's current level to
+ * calculate the animation delay and final opacity.
+ */
+function PictureGridElement({
+  src,
+  index = 1,
+  level = MAX_DEPTH_LEVEL,
+  className
+}: PictureGridElementProps) {
+  const animationDelay = calculateAnimationDelay(index, level)
+
+  return (
+    <img
+      src={src}
+      style={{
+        animationDelay: `${animationDelay}s`,
+        "--final-opacity": level === MAX_DEPTH_LEVEL ? 1 : 0.4,
+      } as React.CSSProperties}
+      className={cn(
+        "opacity-0 w-full h-full object-cover animate-picture-grid",
+        className
+      )}
+    />
   )
 }

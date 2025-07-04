@@ -1,26 +1,23 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --typography-primary: #121212;
-  --typography-secondary: #6B6B6B;
-  --typography-tertiary: #D9D9D9;
+  --soft-grey: #F1F1F1;
+  --dark-grey: #121212;
+  --light-grey: #D9D9D9;
+  --spacial-grey: #6B6B6B;
   --gradient-primary: #377DFF;
   --gradient-secondary: #5093F8;
-  --action-background: #F1F1F1;
 }
 
 @theme inline {
   --font-sans: var(--font-poppins);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-typography-primary: var(--typography-primary);
-  --color-typography-secondary: var(--typography-secondary);
-  --color-typography-tertiary: var(--typography-tertiary);
+  --color-soft-grey: var(--soft-grey);
+  --color-dark-grey: var(--dark-grey);
+  --color-light-grey: var(--light-grey);
+  --color-spacial-grey: var(--spacial-grey);
   --color-gradient-primary: var(--gradient-primary);
   --color-gradient-secondary: var(--gradient-secondary);
-  --color-action-background: var(--action-background);
 }
 
 @layer utilities {
@@ -28,40 +25,25 @@
     @apply bg-linear-[265deg] from-gradient-primary to-gradient-secondary;
   }
 
-  @keyframes fadeIn {
-    from {
+  @keyframes grid-picture {
+    0% {
       opacity: 0;
       transform: scale(0.85);
-      filter: blur(10px);
     }
-  
-    to {
-      opacity: 1;
+
+    25%, 75% {
+      opacity: var(--final-opacity, 1);
       transform: scale(1);
-      filter: blur(0px);
     }
-  }
-
-  @keyframes translucentFadeIn {
-    from {
+   
+    100% {
       opacity: 0;
-      filter: blur(10px);
-    }
-
-    to {
-      opacity: 0.8;
-      filter: blur(0px);
+      transform: scale(0.85);
     }
   }
 
-  .animate-fade-in {
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in-out forwards;
-  }
-
-  .animate-translucent-fade-in {
-    opacity: 0;
-    animation: translucentFadeIn 0.5s ease-in-out forwards;
-    animation-delay: 0.5s;
+  .animate-picture-grid {
+    /* To modify the ending opacity, use the --final-opacity variable */
+    animation: grid-picture 5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   }
 }

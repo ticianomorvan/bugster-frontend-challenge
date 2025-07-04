@@ -10,7 +10,7 @@ type BrandLayoutProps = Readonly<{ children: ReactNode }>;
 
 export default function BrandLayout({ children }: BrandLayoutProps) {
   return (
-    <main className="max-h-screen h-screen w-full flex flex-col overflow-hidden">
+    <main className="max-h-screen h-screen w-full max-w-7xl mx-auto flex flex-col overflow-hidden">
       <Navigation />
 
       {children}

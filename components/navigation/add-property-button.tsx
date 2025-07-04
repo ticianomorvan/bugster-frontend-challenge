@@ -5,6 +5,12 @@ import { useRef } from "react";
 
 import PlusIcon from "../icons/plus-icon";
 
+/**
+ * This components displays and animates the main call-to-action
+ * present in the navigation bar. It will simulate a quick typing
+ * effect when hovered. If the user tries to stop or override the
+ * current animation, we'll handle it accordingly.
+ */
 export default function AddPropertyButton() {
   const textRef = useRef<HTMLSpanElement>(null);
   const isAnimating = useRef<boolean>(false);
@@ -59,7 +65,7 @@ export default function AddPropertyButton() {
 
   return (
     <button
-      className="px-4 py-3 w-42 flex items-center gap-x-1 text-white bg-gradient-primary drop-shadow-[0_4px_10px_rgba(0,0,0,0.2)]"
+      className="px-4 py-3 w-42 flex items-center gap-x-1 text-white bg-gradient-primary drop-shadow-[0_4px_10px_rgba(0,0,0,0.2)] cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

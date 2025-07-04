@@ -1,8 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { cn } from "@/lib/utils";
 
 export interface NavigationItemProps {
   label: string;
@@ -17,7 +18,13 @@ export default function NavigationItem({ label, href }: NavigationItemProps) {
 
   return (
     <li>
-      <Link href={href} className={cn("text-sm font-medium opacity-80", isActive && "bg-gradient-primary bg-clip-text text-transparent")}>
+      <Link
+        href={href}
+        className={cn(
+          "text-sm font-medium opacity-80",
+          isActive && "bg-gradient-primary bg-clip-text text-transparent"
+        )}
+      >
         {label}
       </Link>
     </li>
