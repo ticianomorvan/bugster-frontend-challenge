@@ -65,15 +65,15 @@ export default function PropertySearch({ label }: PropertySearchProps) {
         >
           <PropertySearchOption label="Location" value="Long Beach, California" />
 
-          <div className="w-[1px] h-[100px] bg-light-grey" />
+          <PropertySearchOptionSeparator />
 
           <PropertySearchOption label="Property Type" value="House & Villa" withSelect />
 
-          <div className="w-[1px] h-[100px] bg-light-grey" />
+          <PropertySearchOptionSeparator />
 
           <PropertySearchOption label="Price" value="Advance" withSelect />
 
-          <button className="p-[28px] flex flex-col gap-y-4 items-center bg-gradient-primary">
+          <button className="p-[28px] flex flex-col gap-y-4 items-center bg-gradient-primary cursor-pointer">
             <SearchIcon />
             <p className="text-white opacity-80">Search</p>
           </button>
@@ -100,4 +100,8 @@ function PropertySearchOption({ label, value, withSelect = false }: PropertySear
       <p className="text-[15px] font-normal text-spacial-grey leading-[14px] tracking-[0.3px]">{value}</p>
     </div>
   )
+}
+
+function PropertySearchOptionSeparator() {
+  return <div className="w-[1px] h-[100px] bg-light-grey" />;
 }
