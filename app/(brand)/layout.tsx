@@ -9,11 +9,11 @@ import Navigation from "@/components/navigation";
 type BrandLayoutProps = Readonly<{ children: ReactNode }>;
 
 export default function BrandLayout({ children }: BrandLayoutProps) {
-  return (
-    <main className="max-h-screen h-screen w-full flex-col lg:overflow-hidden">
-      <Navigation />
+	return (
+		<main className="max-h-screen h-screen w-full flex-col lg:overflow-hidden">
+			<Navigation />
 
-      {children}
-    </main>
-  )
+			{children}
+		</main>
+	);
 }

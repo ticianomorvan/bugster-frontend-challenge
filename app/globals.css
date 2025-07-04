@@ -2,48 +2,49 @@
 @import "tw-animate-css";
 
 :root {
-  --soft-grey: #F1F1F1;
-  --dark-grey: #121212;
-  --light-grey: #D9D9D9;
-  --spacial-grey: #6B6B6B;
-  --gradient-primary: #377DFF;
-  --gradient-secondary: #5093F8;
+	--soft-grey: #f1f1f1;
+	--dark-grey: #121212;
+	--light-grey: #d9d9d9;
+	--spacial-grey: #6b6b6b;
+	--gradient-primary: #377dff;
+	--gradient-secondary: #5093f8;
 }
 
 @theme inline {
-  --font-sans: var(--font-poppins);
-  --color-soft-grey: var(--soft-grey);
-  --color-dark-grey: var(--dark-grey);
-  --color-light-grey: var(--light-grey);
-  --color-spacial-grey: var(--spacial-grey);
-  --color-gradient-primary: var(--gradient-primary);
-  --color-gradient-secondary: var(--gradient-secondary);
+	--font-sans: var(--font-poppins);
+	--color-soft-grey: var(--soft-grey);
+	--color-dark-grey: var(--dark-grey);
+	--color-light-grey: var(--light-grey);
+	--color-spacial-grey: var(--spacial-grey);
+	--color-gradient-primary: var(--gradient-primary);
+	--color-gradient-secondary: var(--gradient-secondary);
 }
 
 @layer utilities {
-  .bg-gradient-primary {
-    @apply bg-linear-[265deg] from-gradient-primary to-gradient-secondary;
-  }
+	.bg-gradient-primary {
+		@apply bg-linear-[265deg] from-gradient-primary to-gradient-secondary;
+	}
 
-  @keyframes grid-picture {
-    0% {
-      opacity: 0;
-      transform: scale(0.85);
-    }
+	@keyframes grid-picture {
+		0% {
+			opacity: 0;
+			transform: scale(0.85);
+		}
 
-    25%, 75% {
-      opacity: var(--final-opacity, 1);
-      transform: scale(1);
-    }
-   
-    100% {
-      opacity: 0;
-      transform: scale(0.85);
-    }
-  }
+		25%,
+		75% {
+			opacity: var(--final-opacity, 1);
+			transform: scale(1);
+		}
 
-  .animate-picture-grid {
-    /* To modify the ending opacity, use the --final-opacity variable */
-    animation: grid-picture 5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-  }
+		100% {
+			opacity: 0;
+			transform: scale(0.85);
+		}
+	}
+
+	.animate-picture-grid {
+		/* To modify the ending opacity, use the --final-opacity variable */
+		animation: grid-picture 5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+	}
 }
