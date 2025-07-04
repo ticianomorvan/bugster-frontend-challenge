@@ -65,11 +65,13 @@ export default function AddPropertyButton() {
 
   return (
     <button
-      className="px-4 py-3 w-42 flex items-center gap-x-1 text-white bg-gradient-primary drop-shadow-[0_4px_10px_rgba(0,0,0,0.2)] cursor-pointer"
+      className="px-4 py-3 w-[138px] flex items-center gap-x-1 text-white bg-gradient-primary drop-shadow-[0_4px_10px_rgba(0,0,0,0.2)] cursor-pointer lg:w-42"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <PlusIcon />
+      <span className="hidden lg:block">
+        <PlusIcon />
+      </span>
 
       <span ref={textRef} className="font-medium">
         Add Property

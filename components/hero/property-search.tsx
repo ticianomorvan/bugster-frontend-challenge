@@ -60,8 +60,10 @@ export default function PropertySearch({ label }: PropertySearchProps) {
       <PopoverPortal>
         <PopoverContent
           align="start"
+          side="bottom"
+          avoidCollisions={false}
           alignOffset={alignOffset}
-          className="w-[47.625rem] pl-8 pr-3 py-4 flex items-center justify-between bg-white drop-shadow-[10px_0px_40px_rgba(0,0,0,0.15)] data-[state=open]:animate-in data-[state=open]:fade-in data-[state=closed]:animate-out data-[state=closed]:fade-out"
+          className="w-fit p-8 flex flex-col gap-12 bg-white drop-shadow-[10px_0px_40px_rgba(0,0,0,0.15)] data-[state=open]:animate-in data-[state=open]:fade-in data-[state=closed]:animate-out data-[state=closed]:fade-out lg:w-[47.625rem] lg:pl-8 lg:pr-3 lg:py-4 lg:flex-row lg:items-center lg:justify-between lg:gap-0"
         >
           <PropertySearchOption label="Location" value="Long Beach, California" />
 
@@ -103,5 +105,5 @@ function PropertySearchOption({ label, value, withSelect = false }: PropertySear
 }
 
 function PropertySearchOptionSeparator() {
-  return <div className="w-[1px] h-[100px] bg-light-grey" />;
+  return <div className="hidden lg:block lg:w-[1px] lg:h-[100px] lg:bg-light-grey" />;
 }

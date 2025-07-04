@@ -13,10 +13,10 @@ const navigationItems: NavigationItemProps[] = routes.map((route) => ({
 
 export default function Navigation() {
   return (
-    <nav className="h-[6.25rem] flex items-center justify-around">
+    <nav className="pt-4 pb-6 flex items-center justify-around lg:pt-0 lg:pb-0 lg:h-[6.25rem]">
       <BunqIcon />
 
-      <ul className="flex items-center gap-10">
+      <ul className="hidden lg:flex lg:items-center lg:gap-10">
         {navigationItems.map((navigationItem) => (
           <NavigationItem key={navigationItem.label} {...navigationItem} />
         ))}
@@ -24,7 +24,9 @@ export default function Navigation() {
 
       <div className="flex items-center">
         <button className="pr-6 flex items-center gap-x-4 cursor-pointer">
-          <UserIcon />
+          <span className="hidden lg:block">
+            <UserIcon />
+          </span>
           
           <span className="text-gradient-primary font-medium">
             Sign In

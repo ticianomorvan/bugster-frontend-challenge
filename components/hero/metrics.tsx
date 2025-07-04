@@ -23,7 +23,7 @@ const metrics: Metric[] = [
 export default function Metrics() {
   return (
     <div>
-      <ul className="flex items-center gap-x-16">
+      <ul className="flex flex-wrap items-center justify-center gap-16 md:justify-start lg:flex-nowrap">
         {metrics.map((metric) => (
           <li key={metric.label} className="min-w-16 flex flex-col gap-y-3">
             <div className="flex items-center text-gradient-primary text-[32px] font-bold leading-8">
