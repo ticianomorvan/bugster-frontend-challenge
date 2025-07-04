@@ -66,7 +66,7 @@ export default function PictureGrid({
 					<PictureGridElement
 						index={2}
 						level={level}
-						src={pictureSources[2]}
+						src={pictureSources[2].src}
 						className="object-cover scale-115"
 					/>
 				</div>
@@ -82,7 +82,7 @@ export default function PictureGrid({
 					<PictureGridElement
 						index={0}
 						level={level}
-						src={pictureSources[0]}
+						src={pictureSources[0].src}
 						className="object-[65%] scale-105"
 					/>
 				</div>
@@ -91,7 +91,7 @@ export default function PictureGrid({
 					<PictureGridElement
 						index={1}
 						level={level}
-						src={pictureSources[1]}
+						src={pictureSources[1].src}
 						className="object-[0_15%] scale-150 transform translate-x-8"
 					/>
 				</div>
@@ -109,7 +109,7 @@ const calculateAnimationDelay = (index: number, level: number) => {
 };
 
 interface PictureGridElementProps {
-	src: StaticImageData;
+	src: string;
 	index?: number;
 	level?: number;
 	className?: string;
@@ -132,7 +132,7 @@ function PictureGridElement({
 	const animationDelay = calculateAnimationDelay(index, level);
 
 	return (
-		<Image
+		<img
 			src={src}
 			alt={`Grid element ${index} at level ${level}`}
 			style={
